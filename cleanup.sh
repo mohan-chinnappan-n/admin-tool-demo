@@ -1,0 +1,1 @@
+sed 's/LastModifiedBy\.Name/LastModifiedByName/g' sample.csv
