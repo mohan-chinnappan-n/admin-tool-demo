@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <version>58.0</version>
+  <types>
+    <members>Account.Followup_Type__c</members>
+    <name>CustomField</name>
+  </types>
+  <types>
+    <members>Admin</members>
+    <name>Profile</name>
+  </types>
+  <types>
+    <members>Account-Account (Support) Layout</members>
+    <members>Account-Account (Sales) Layout</members>
+    <members>Account-Account Layout</members>
+    <members>Account-Account (Marketing) Layout</members>
+    <name>Layout</name>
+  </types>
+</Package>
