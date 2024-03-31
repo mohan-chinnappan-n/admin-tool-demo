@@ -1,6 +1,17 @@
 
 # Admin Changes - Demo with Scratch Org
 
+## Create sfdx project
+```bash
+mkdir admin-tool-testing
+cd admin-tool-testing
+sf project create -n att
+cd att
+
+```
+
+---
+
 ## Create Scratch Org:
 
 ```bash
