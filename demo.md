@@ -131,7 +131,7 @@ sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | pyth
 
 
 ```bash
- att git:(main) sf force source status -o test-sxwumcwgjo6z@example.com
+sf force source status -o test-sxwumcwgjo6z@example.com
  ```
  ```
  STATE FULL NAME TYPE PROJECT PATH 
