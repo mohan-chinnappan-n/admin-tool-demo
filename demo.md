@@ -102,7 +102,7 @@ Id,LastModifiedByName,MemberIdOrName,MemberType,MemberName,RevisionNum,RevisionC
 Querying Data... done
 ```
 ```bash
-sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | python gen_packagexml.py 
+sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | python tools/gen_packagexml.py 
 ```
 
 ```xml
