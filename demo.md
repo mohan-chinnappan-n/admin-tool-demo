@@ -128,7 +128,114 @@ sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | pyth
 </Package>
 ```
 
+## Using 
 
+``` bash
+ sf project retrieve start -o test-sxwumcwgjo6z@example.com
+```
+
+```
+
+Retrieving v59.0 metadata from test-sxwumcwgjo6z@example.com using the v60.0 SOAP API
+Preparing retrieve request... Succeeded
+
+Retrieved Source
+==================================================================================================================================================
+| State   Name                                   Type        Path                                                                                  
+| ─────── ────────────────────────────────────── ─────────── ───────────────────────────────────────────────────────────────────────────────────── 
+| Created Account.STTest__c                      CustomField force-app/main/default/objects/Account/fields/STTest__c.field-meta.xml                
+| Changed Account-Account %28Marketing%29 Layout Layout      force-app/main/default/layouts/Account-Account %28Marketing%29 Layout.layout-meta.xml 
+| Changed Account-Account %28Sales%29 Layout     Layout      force-app/main/default/layouts/Account-Account %28Sales%29 Layout.layout-meta.xml     
+| Changed Account-Account %28Support%29 Layout   Layout      force-app/main/default/layouts/Account-Account %28Support%29 Layout.layout-meta.xml   
+| Changed Account-Account Layout                 Layout      force-app/main/default/layouts/Account-Account Layout.layout-meta.xml                 
+| Changed Admin                                  Profile     force-app/main/default/profiles/Admin.profile-meta.xml                        
+```
+-----
+
+```bash
+git status 
+```
+
+```
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   force-app/main/default/layouts/Account-Account %28Marketing%29 Layout.layout-meta.xml
+	modified:   force-app/main/default/layouts/Account-Account %28Sales%29 Layout.layout-meta.xml
+	modified:   force-app/main/default/layouts/Account-Account %28Support%29 Layout.layout-meta.xml
+	modified:   force-app/main/default/layouts/Account-Account Layout.layout-meta.xml
+	modified:   force-app/main/default/profiles/Admin.profile-meta.xml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	force-app/main/default/objects/Account/fields/STTest__c.field-meta.xml
+
+```
+
+- Now you can commit this into your branch - StoryNumber-xxx (that you cut from the develop)
+
+
+
+### Content of maxRevision.json
+```bash
+cat .sf/orgs/00D8K00000162DmUAI/c.json
+```
+
+
+
+```json
+
+{
+    "serverMaxRevisionCounter": 12,
+    "sourceMembers": {
+        "CustomField__Account.Followup_Type__c": {
+            "serverRevisionCounter": 1,
+            "lastRetrievedFromServer": 1,
+            "memberType": "CustomField",
+            "isNameObsolete": false
+        },
+        "Profile__Admin": {
+            "serverRevisionCounter": 12,
+            "lastRetrievedFromServer": 12,
+            "memberType": "Profile",
+            "isNameObsolete": false
+        },
+        "Layout__Account-Account (Marketing) Layout": {
+            "serverRevisionCounter": 8,
+            "lastRetrievedFromServer": 8,
+            "memberType": "Layout",
+            "isNameObsolete": false
+        },
+        "Layout__Account-Account (Sales) Layout": {
+            "serverRevisionCounter": 9,
+            "lastRetrievedFromServer": 9,
+            "memberType": "Layout",
+            "isNameObsolete": false
+        },
+        "Layout__Account-Account (Support) Layout": {
+            "serverRevisionCounter": 10,
+            "lastRetrievedFromServer": 10,
+            "memberType": "Layout",
+            "isNameObsolete": false
+        },
+        "Layout__Account-Account Layout": {
+            "serverRevisionCounter": 11,
+            "lastRetrievedFromServer": 11,
+            "memberType": "Layout",
+            "isNameObsolete": false
+        },
+        "CustomField__Account.STTest__c": {
+            "serverRevisionCounter": 7,
+            "lastRetrievedFromServer": 7,
+            "memberType": "CustomField",
+            "isNameObsolete": false
+        }
+    }
+}
+```
 
 ```bash
 sf force source status -o test-sxwumcwgjo6z@example.com
