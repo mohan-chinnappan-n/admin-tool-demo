@@ -40,6 +40,8 @@ Your scratch org is ready.
 sf force org open -u test-sxwumcwgjo6z@example.com
 ```
 
+## Input data
+![input data](img/admin-changes-tools-1.png)
 
 ## Query the org for these changes
 
