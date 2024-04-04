@@ -1,6 +1,9 @@
 
 # Admin Changes - Demo with Scratch Org
 
+
+![Pipeline](img/admin-change-tool-pipeline.png)
+
 ## Create sfdx project
 ```bash
 mkdir admin-tool-testing
