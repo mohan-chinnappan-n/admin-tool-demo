@@ -4,7 +4,7 @@
 
 ![Pipeline](img/admin-change-tool-pipeline.png)
 
-## Create sfdx project
+## Create sfdx project (DevOps Setup)
 ```bash
 mkdir admin-tool-testing
 cd admin-tool-testing
@@ -15,7 +15,7 @@ cd att
 
 ---
 
-## Create Scratch Org:
+## Create Scratch Org (DevOps setup - it will be a Dev/DevPro Sandbox)
 
 ```bash
 sf org create scratch -f config/project-scratch-def.json -a att_sorg -v mohan.chinnappan.n.sel2@gmail.com
@@ -38,15 +38,21 @@ Your scratch org is ready.
 
 ```
 
-## Open the Scratch org
+## Open the Scratch org (Admin will use this sandbox/scratchOrg)
 ```bash
 sf force org open -u test-sxwumcwgjo6z@example.com
 ```
 
-## Input data
+## Input data (DevOps will work with Admin to form this CSV file)
 ![input data](img/admin-changes-tools-1.png)
 
-## Query the org for these changes
+## Create a git branch StoryNumber-xxx  (Pipeline)
+```bash
+git branch StoryNumber-xxx
+
+```
+
+## Query the org for these changes (Pipeline will do this )
 
 ```sql
 SELECT
@@ -73,10 +79,11 @@ sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv
 Querying Data... done
 ```
 
-## Make changes
+## Make changes (Admin User)
 - Create a picklist field Followup_type in the org manually
     - This simulates what the Admin users do
 
+### Pipeline performs this
 ```bash
 sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv 
 ```
@@ -106,6 +113,8 @@ Id,LastModifiedByName,MemberIdOrName,MemberType,MemberName,RevisionNum,RevisionC
 ```
 Querying Data... done
 ```
+
+## package.xml generation (Pipeline)
 ```bash
 sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | python tools/gen_packagexml.py 
 ```
@@ -133,7 +142,7 @@ sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | pyth
 </Package>
 ```
 
-## Using 
+## Retrieving changes and the created git branch   (Pipeline)
 
 ``` bash
  sf project retrieve start -o test-sxwumcwgjo6z@example.com
@@ -156,6 +165,9 @@ Retrieved Source
 | Changed Admin                                  Profile     force-app/main/default/profiles/Admin.profile-meta.xml                        
 ```
 -----
+
+
+## Git Operations (Pipeline)
 
 ```bash
 git status 
@@ -180,11 +192,19 @@ Untracked files:
 
 ```
 
-- Now you can commit this into your branch - StoryNumber-xxx (that you cut from the develop)
+
+### Now you can commit this into your branch - StoryNumber-xxx (that you cut from the develop) (Pipeline)
+
+```bash
+git commit -m 'StoryNumber-xxx'
+
+git push
+
+```
+----
 
 
-
-### Content of maxRevision.json
+### Content of maxRevision.json (Optional)
 ```bash
 cat .sf/orgs/00D8K00000162DmUAI/c.json
 ```
@@ -241,6 +261,9 @@ cat .sf/orgs/00D8K00000162DmUAI/c.json
     }
 }
 ```
+----
+
+## Source status (Pipeline)
 
 ```bash
 sf force source status -o test-sxwumcwgjo6z@example.com
@@ -261,6 +284,8 @@ sf force source status -o test-sxwumcwgjo6z@example.com
  Remote Changed (Conflict) Account-Account Layout Layout force-app/main/default/layouts/Account-Account Layout.layout-meta.xml 
  Remote Changed (Conflict) Admin Profile force-app/main/default/profiles/Admin.profile-meta.xml 
 ```
+
+----
 
 ## Source push
 
