@@ -18,14 +18,15 @@ cd att
 ## Create Scratch Org (DevOps setup - it will be a Dev/DevPro Sandbox)
 
 ```bash
-sf org create scratch -f config/project-scratch-def.json -a att_sorg -v mohan.chinnappan.n.sel2@gmail.com
+sf org create scratch -f config/project-scratch-def.json -a att_sorg3 -v mohan.chinnappan.n_ea2@gmail.com 
+
 ```
 
 ```
 Creating Scratch Org... 
-RequestId: 2SR3h000000Lx3vGAC (https://mohansun-ea-02-dev-ed.my.salesforce.com/2SR3h000000Lx3vGAC)
-OrgId: 00D8K00000162Dm 
-Username: test-sxwumcwgjo6z@example.com 
+RequestId: 2SR3h000000Lx4UGAS (https://mohansun-ea-02-dev-ed.my.salesforce.com/2SR3h000000Lx4UGAS)
+OrgId: 00D8B0000019u1n 
+Username: test-6erewap1gcz8@example.com 
 ✓ Prepare Request
 ✓ Send Request
 ✓ Wait For Org
@@ -67,7 +68,7 @@ LastModifiedById,
 IsNewMember,
 ChangedBy
 FROM SourceMember
-WHERE LastModifiedBy.Name = 'User User‘
+WHERE LastModifiedBy.Name = 'User User'
 AND MemberType IN ('CustomField')
 ```
 
@@ -142,6 +143,44 @@ sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | pyth
 </Package>
 ```
 
+
+## Folder structure before the retrieve
+
+```
+tree                                                       
+.
+├── README.md
+├── _my_sm.soql
+├── config
+│   └── project-scratch-def.json
+├── force-app
+│   └── main
+│       └── default
+│           ├── applications
+│           ├── aura
+│           ├── classes
+│           ├── contentassets
+│           ├── flexipages
+│           ├── layouts
+│           ├── lwc
+│           ├── objects
+│           ├── permissionsets
+│           ├── staticresources
+│           ├── tabs
+│           └── triggers
+├── jest.config.js
+├── package.json
+├── scripts
+│   ├── apex
+│   │   └── hello.apex
+│   └── soql
+│       └── account.soql
+└── sfdx-project.json
+
+19 directories, 8 files
+
+```
+
 ## Retrieving changes and the created git branch   (Pipeline)
 
 ``` bash
@@ -150,22 +189,71 @@ sf data query -f ./_my_sm.soql -o test-sxwumcwgjo6z@example.com -t -r csv | pyth
 
 ```
 
-Retrieving v59.0 metadata from test-sxwumcwgjo6z@example.com using the v60.0 SOAP API
+ ➜  att git:(StoryNumber-1234) ✗ sf project retrieve start -o att_sorg3
+Retrieving v59.0 metadata from test-6erewap1gcz8@example.com using the v60.0 SOAP API
 Preparing retrieve request... Succeeded
 
 Retrieved Source
-==================================================================================================================================================
-| State   Name                                   Type        Path                                                                                  
-| ─────── ────────────────────────────────────── ─────────── ───────────────────────────────────────────────────────────────────────────────────── 
-| Created Account.STTest__c                      CustomField force-app/main/default/objects/Account/fields/STTest__c.field-meta.xml                
-| Changed Account-Account %28Marketing%29 Layout Layout      force-app/main/default/layouts/Account-Account %28Marketing%29 Layout.layout-meta.xml 
-| Changed Account-Account %28Sales%29 Layout     Layout      force-app/main/default/layouts/Account-Account %28Sales%29 Layout.layout-meta.xml     
-| Changed Account-Account %28Support%29 Layout   Layout      force-app/main/default/layouts/Account-Account %28Support%29 Layout.layout-meta.xml   
-| Changed Account-Account Layout                 Layout      force-app/main/default/layouts/Account-Account Layout.layout-meta.xml                 
-| Changed Admin                                  Profile     force-app/main/default/profiles/Admin.profile-meta.xml                        
+===================================================================================================================================================
+| State   Name                                   Type         Path                                                                                  
+| ─────── ────────────────────────────────────── ──────────── ───────────────────────────────────────────────────────────────────────────────────── 
+| Created Account.GreenIndex__c                  CustomField  force-app/main/default/objects/Account/fields/GreenIndex__c.field-meta.xml            
+| Created Account                                CustomObject force-app/main/default/objects/Account/Account.object-meta.xml                        
+| Created Account-Account %28Marketing%29 Layout Layout       force-app/main/default/layouts/Account-Account %28Marketing%29 Layout.layout-meta.xml 
+| Created Account-Account %28Sales%29 Layout     Layout       force-app/main/default/layouts/Account-Account %28Sales%29 Layout.layout-meta.xml     
+| Created Account-Account %28Support%29 Layout   Layout       force-app/main/default/layouts/Account-Account %28Support%29 Layout.layout-meta.xml   
+| Created Account-Account Layout                 Layout       force-app/main/default/layouts/Account-Account Layout.layout-meta.xml                 
+| Created Admin                                  Profile      force-app/main/default/profiles/Admin.profile-meta.xml   
 ```
 -----
 
+
+## Folder structure after the retrieve
+
+```
+att git:(StoryNumber-1234) ✗ tree
+.
+├── README.md
+├── _my_sm.soql
+├── config
+│   └── project-scratch-def.json
+├── force-app
+│   └── main
+│       └── default
+│           ├── applications
+│           ├── aura
+│           ├── classes
+│           ├── contentassets
+│           ├── flexipages
+│           ├── layouts
+│           │   ├── Account-Account\ %28Marketing%29\ Layout.layout-meta.xml
+│           │   ├── Account-Account\ %28Sales%29\ Layout.layout-meta.xml
+│           │   ├── Account-Account\ %28Support%29\ Layout.layout-meta.xml
+│           │   └── Account-Account\ Layout.layout-meta.xml
+│           ├── lwc
+│           ├── objects
+│           │   └── Account
+│           │       ├── Account.object-meta.xml
+│           │       └── fields
+│           │           └── GreenIndex__c.field-meta.xml
+│           ├── permissionsets
+│           ├── profiles
+│           │   └── Admin.profile-meta.xml
+│           ├── staticresources
+│           ├── tabs
+│           └── triggers
+├── jest.config.js
+├── package.json
+├── scripts
+│   ├── apex
+│   │   └── hello.apex
+│   └── soql
+│       └── account.soql
+└── sfdx-project.json
+
+22 directories, 15 files
+
+```
 
 ## Git Operations (Pipeline)
 
@@ -174,21 +262,16 @@ git status
 ```
 
 ```
-On branch main
-Your branch is up to date with 'origin/main'.
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	modified:   force-app/main/default/layouts/Account-Account %28Marketing%29 Layout.layout-meta.xml
-	modified:   force-app/main/default/layouts/Account-Account %28Sales%29 Layout.layout-meta.xml
-	modified:   force-app/main/default/layouts/Account-Account %28Support%29 Layout.layout-meta.xml
-	modified:   force-app/main/default/layouts/Account-Account Layout.layout-meta.xml
-	modified:   force-app/main/default/profiles/Admin.profile-meta.xml
-
+➜  att git:(StoryNumber-1234) ✗ git status
+On branch StoryNumber-1234
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-	force-app/main/default/objects/Account/fields/STTest__c.field-meta.xml
+	_my_sm.soql
+	force-app/main/default/layouts/
+	force-app/main/default/objects/
+	force-app/main/default/profiles/
+
+nothing added to commit but untracked files present (use "git add" to track)
 
 ```
 
@@ -196,7 +279,12 @@ Untracked files:
 ### Now you can commit this into your branch - StoryNumber-xxx (that you cut from the develop) (Pipeline)
 
 ```bash
-git commit -m 'StoryNumber-xxx'
+
+git add -A
+git commit -m 'StoryNumber-1234:Description'
+
+git checkout main
+git merge StoryNumber-1234
 
 git push
 
