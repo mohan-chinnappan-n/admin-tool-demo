@@ -8,7 +8,7 @@
 ```bash
 mkdir admin-tool-testing
 cd admin-tool-testing
-sf project create -n att
+sf project generate -n att
 cd att
 
 ```
